@@ -1,24 +1,29 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { NavBar, TestItem, LogoSection, AccountSection, NavigationSection, AccountButton, AccountButtonText, AccountImageButtons, AccountButtonIcon, ButtonSvg, AccountButtonIconLink, AccountDropdown, AccountDropdownItem, AccountDropdownIconButton, AccountDropdownIconRight, NavigationItem } from './NavbarElements';
+import { useMediaQuery } from 'react-responsive';
+import { NavBar, TestItem, LogoSection, AccountSection, NavigationSection, AccountButton, AccountButtonText, AccountImageButtons, AccountButtonIcon, ButtonSvg, ButtonImg, AccountButtonIconLink, AccountDropdown, AccountDropdownItem, AccountDropdownIconButton, AccountDropdownIconRight, NavigationItem } from './NavbarElements';
 import { ReactComponent as PlusIcon } from '../../images/plus.svg'
 import { ReactComponent as CaretIcon } from '../../images/caret.svg'
 import { ReactComponent as CogIcon } from '../../images/cog.svg'
+import { ReactComponent as CartIcon } from '../../images/cart.svg'
+import { selectCartItemsCount } from '../../redux/Cart/cart.selector';
 
-const mapState = ({ user }) => ({
-    currentUser: user.currentUser
+const mapState = (state) => ({
+    currentUser: state.user.currentUser,
+    totalNumCartItems: selectCartItemsCount(state)
 })
 
 const Navbar = props => {
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const { currentUser } = useSelector(mapState)
+    const { currentUser, totalNumCartItems } = useSelector(mapState)
     const location = useLocation()
+    const buttonsDisappeared = useMediaQuery({ query: "(max-width: 736px)" });
 
     return (
         <NavBar>
             <LogoSection>
-                <TestItem >Logo</TestItem>
+                <TestItem>Logo</TestItem>
             </LogoSection>
             <NavigationSection>
                 <NavigationItem to="/discover">Discover</NavigationItem>
@@ -26,15 +31,20 @@ const Navbar = props => {
             </NavigationSection>
             { currentUser && 
                 <AccountSection>
-                    { location.pathname === "/discover" && 
+                    { ( location.pathname === "/discover" || location.pathname.includes("/product") ) && 
                         <AccountButton to="/checkout">
-                            <AccountButtonText>Basket</AccountButtonText>
+                            <AccountButtonText>Basket {totalNumCartItems > 0 ? `(${totalNumCartItems})` : ""}</AccountButtonText>
                         </AccountButton>
                     }
                     <AccountButton to="/dashboard">
                         <AccountButtonText>Profile</AccountButtonText>
                     </AccountButton>
                     <AccountImageButtons>
+                        { buttonsDisappeared && 
+                            <AccountButtonIconLink to="/checkout">
+                                <ButtonSvg>{<CartIcon/>}</ButtonSvg>
+                            </AccountButtonIconLink>
+                        }
                         <AccountButtonIconLink to="/create">
                             <ButtonSvg>{<PlusIcon />}</ButtonSvg>
                         </AccountButtonIconLink>

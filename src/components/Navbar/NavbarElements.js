@@ -69,7 +69,7 @@ export const AccountButton = styled(LinkRoute)`
     }
 `
 
-export const AccountButtonText = styled.text`
+export const AccountButtonText = styled.div`
     font-family: inherit;
     margin: 0 5px 0 5px;
     color: black;
@@ -108,7 +108,7 @@ export const AccountButtonIconLink= styled(LinkRoute)`
     }
 `
 
-export const AccountButtonIcon = styled.div`
+export const AccountButtonIcon = styled.button`
     width: 36px;
     height: 36px;
     background-color: #e4e6eb;
@@ -119,6 +119,8 @@ export const AccountButtonIcon = styled.div`
     align-items: center;
     justify-content: center;
     transition: filter 300ms;
+    cursor: pointer;
+    border: 0px;
 
     &:hover{
         filter: brightness(0.8)
@@ -130,6 +132,13 @@ export const AccountButtonIcon = styled.div`
 `
 
 export const ButtonSvg = styled.svg`
+    fill: black;
+    width: 20px;
+    height: 20px;
+    color: black;
+`
+
+export const ButtonImg = styled.img`
     fill: black;
     width: 20px;
     height: 20px;
@@ -145,6 +154,7 @@ export const AccountDropdown = styled.div`
     border-radius: 8px;
     padding: 1rem;
     overflow: hidden;
+    z-index: 99;
 `
 
 export const AccountDropdownItem = styled(LinkRoute)`

@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { signUpUser, resetAllAuthForms } from '../../redux/User/user.actions'
+import { useHistory } from 'react-router-dom'
+import { signUpUserStart } from '../../redux/User/user.actions'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 const mapState = ({ user }) => ({
-    signUpSuccess: user.signUpSuccess,
-    signUpError: user.signUpError
+    currentUser: user.currentUser,
+    userError: user.userError
 })
 
 const Signup = props => {
     const dispatch = useDispatch()
-    const { signUpSuccess, signUpError } = useSelector(mapState)
-    const [displayName, setDisplayName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [errors, setErrors] = useState([])
+    const history = useHistory()
+    const { currentUser, userError } = useSelector(mapState)
+    const [ displayName, setDisplayName ] = useState("")
+    const [ email, setEmail ] = useState("")
+    const [ password, setPassword ] = useState("")
+    const [ confirmPassword, setConfirmPassword ] = useState("")
+    const [ errors, setErrors ] = useState([])
 
     useEffect(() => {
-        if (signUpSuccess) {
+        if (currentUser) {
             resetForm()
-            dispatch(resetAllAuthForms())
-            props.history.push("/")
+            history.push("/")
         }
-    }, [signUpSuccess])
+    }, [currentUser])
 
     useEffect(() => {
-        if (Array.isArray(signUpError) && signUpError.length > 0) {
-            setErrors(signUpError)
+        if (Array.isArray(userError) && userError.length > 0) {
+            setErrors(userError)
         }
-    }, [signUpError])
+    }, [userError])
 
     const resetForm = () => {
         setDisplayName("")
@@ -43,7 +43,7 @@ const Signup = props => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
-        dispatch(signUpUser({
+        dispatch(signUpUserStart({
             displayName,
             email,
             password,
@@ -93,4 +93,4 @@ const Signup = props => {
     )
 }
 
-export default withRouter(Signup)
+export default Signup

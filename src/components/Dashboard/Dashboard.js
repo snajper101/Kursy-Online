@@ -1,22 +1,19 @@
 import React, { useState } from 'react'
 import { Card, Button, Alert } from 'react-bootstrap'
-import { useAuth } from '../../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { signOutUserStart } from '../../redux/User/user.actions'
 
-export default function Dashboard() {
-    const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
-    const history = useHistory()
+const mapState = ({user}) => ({
+    currentUser: user.currentUser
+})
 
-    async function handleLogout() {
-        setError("")
+const Dashboard = props => {
+    const dispatch = useDispatch()
+    const { currentUser } = useSelector(mapState)
 
-        try {
-            await logout()
-            history.push("/signin")
-        } catch( blad ) {
-            setError("Failed to log out")
-        }
+    const signOut = () => {
+        dispatch(signOutUserStart())
     }
 
     return (
@@ -24,16 +21,21 @@ export default function Dashboard() {
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Profile</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
                     <strong>Email: </strong>{currentUser && currentUser.email}
                     <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile </Link>
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
-                <Button variant="link" onClick={handleLogout}>
+                <Button variant="link" onClick={() => signOut()}>
                     Log out
                 </Button>
             </div>
         </>
     )
 }
+
+Dashboard.defaultProps = {
+    currentUser: null
+}
+
+export default Dashboard
