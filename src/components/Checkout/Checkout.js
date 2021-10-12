@@ -1,10 +1,19 @@
 import React from 'react'
+
+//Styled Components
 import {} from "./CheckoutComponents"
 
-export default function Checkout() {
+//Components
+import Navbar from "../Navbar"
+
+const Checkout = ({}) => {
+
+
     return (
-        <div>
-            
-        </div>
+        <>
+            <Navbar />
+        </>
     )
 }
+
+export default Checkout

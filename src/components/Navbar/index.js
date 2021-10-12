@@ -31,8 +31,8 @@ const Navbar = props => {
             </NavigationSection>
             { currentUser && 
                 <AccountSection>
-                    { ( location.pathname === "/discover" || location.pathname.includes("/product") ) && 
-                        <AccountButton to="/checkout">
+                    { ( location.pathname === "/discover" || location.pathname === "/cart" || location.pathname.includes("/product") ) && 
+                        <AccountButton to="/cart">
                             <AccountButtonText>Basket {totalNumCartItems > 0 ? `(${totalNumCartItems})` : ""}</AccountButtonText>
                         </AccountButton>
                     }
@@ -41,7 +41,7 @@ const Navbar = props => {
                     </AccountButton>
                     <AccountImageButtons>
                         { buttonsDisappeared && 
-                            <AccountButtonIconLink to="/checkout">
+                            <AccountButtonIconLink to="/cart">
                                 <ButtonSvg>{<CartIcon/>}</ButtonSvg>
                             </AccountButtonIconLink>
                         }

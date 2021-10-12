@@ -24,6 +24,7 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword'
 import Dashboard from './components/Dashboard/Dashboard'
 import Admin from './components/Admin/Admin'
 import ProductDetails from './pages/ProductDetails/ProductDetails'
+import Cart from './pages/Cart/Cart'
 
 const App = props => {
   const dispatch = useDispatch()
@@ -37,15 +38,20 @@ const App = props => {
       <AdminToolbar />
       <Switch>
         <Route exact path="/" component={MainPage} />
-        <Route path="/discover" component={Discover} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/discover" render={() => (
+          <Discover />
+        )} />
+        <Route path="/product/:productID" render={() => (
+          <ProductDetails />
+        )} />
+        <Route path="/cart" render={() => (
+          <Cart />
+        )} />
         <Route path="/admin" render={() => (
           <WithAdminAuth>
             <Admin />
           </WithAdminAuth>
-        )} />
-        <Route path="/product/:productID" render={() => (
-          <ProductDetails />
         )} />
         <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
           <div className="w-100" style={{ maxWidth: "400px" }}>

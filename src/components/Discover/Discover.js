@@ -59,8 +59,8 @@ const Discover = props => {
                 <ProductsGrid>
                     { data && data.map((product, index) => {
                         return (
-                            <ProductContainer>
-                                <Product key={index} {...product} />
+                            <ProductContainer key={index}>
+                                <Product  {...product} />
                             </ProductContainer>
                         )
                     })
