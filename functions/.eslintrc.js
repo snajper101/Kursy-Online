@@ -8,7 +8,11 @@ module.exports = {
     "eslint:recommended",
     "google",
   ],
+  parserOptions: {
+    "ecmaVersion": 2017,
+  },
   rules: {
-    quotes: ["error", "double"],
+    "quotes": ["off", "double"],
+    "max-len": ["off", 150, 4],
   },
 };

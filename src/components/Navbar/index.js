@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { NavBar, TestItem, LogoSection, AccountSection, NavigationSection, AccountButton, AccountButtonText, AccountImageButtons, AccountButtonIcon, ButtonSvg, ButtonImg, AccountButtonIconLink, AccountDropdown, AccountDropdownItem, AccountDropdownIconButton, AccountDropdownIconRight, NavigationItem } from './NavbarElements';
+import { NavBar, Logo, LogoSection, AccountSection, NavigationSection, AccountButton, AccountButtonText, AccountImageButtons, AccountButtonIcon, ButtonSvg, ButtonImg, AccountButtonIconLink, AccountDropdown, AccountDropdownItem, AccountDropdownIconButton, AccountDropdownIconRight, NavigationItem } from './NavbarElements';
 import { ReactComponent as PlusIcon } from '../../images/plus.svg'
 import { ReactComponent as CaretIcon } from '../../images/caret.svg'
 import { ReactComponent as CogIcon } from '../../images/cog.svg'
@@ -23,7 +23,7 @@ const Navbar = props => {
     return (
         <NavBar>
             <LogoSection>
-                <TestItem>Logo</TestItem>
+                <Logo to="/"></Logo>
             </LogoSection>
             <NavigationSection>
                 <NavigationItem to="/discover">Discover</NavigationItem>

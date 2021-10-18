@@ -14,9 +14,9 @@ export const handleAddToCart = ({
     const quantityIncrement = 1
     const cartItemExists = exisitingCartItem({ previousCartItems, nextCartItem })
 
-    if (cartItemExists) return {
+    if (cartItemExists) return [
         ...previousCartItems
-    } 
+    ]
 
     return [
         ...previousCartItems,

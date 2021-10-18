@@ -88,6 +88,6 @@ export const CartButton = styled.div`
     cursor: pointer;
 
     &:hover {
-        background: #ff6d6d;
+        opacity: 0.7;
     }
 `

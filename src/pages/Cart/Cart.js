@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { selectCartItems, selectCartTotal } from '../../redux/Cart/cart.selector'
 import { createStructuredSelector } from "reselect"
 
@@ -18,7 +19,11 @@ const mapState = createStructuredSelector({
 
 const Cart = () => {
   const { cartItems, total }  = useSelector(mapState)   
+  const history = useHistory()
 
+  const handleCheckout = () => {
+    history.push("/checkout")
+  }
 
   return (
     <>
@@ -38,7 +43,7 @@ const Cart = () => {
               Total: {total}$
             </TotalPrice>
             <ButtonSection>
-              <CartButton>Checkout</CartButton>
+              <CartButton onClick={() => handleCheckout()}>Checkout</CartButton>
             </ButtonSection> 
           </>
         }

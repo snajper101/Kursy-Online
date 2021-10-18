@@ -39,6 +39,8 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
         email,
         createdData: timestamp,
         roles,
+        isCreator: false,
+        planId: -1,
         ...additionalData
       })
     } catch(error) {

@@ -17,14 +17,18 @@ import { Container } from 'react-bootstrap'
 import UpdateProfile from './components/UpdateProfile/UpdateProfile'
 import MainPage from './components/MainPage'
 import Discover from './components/Discover/Discover'
-import Checkout from './components/Checkout/Checkout'
 import Signup from './components/Signup/Signup'
 import Signin from './components/Signin/Signin'
 import ForgotPassword from './components/ForgotPassword/ForgotPassword'
-import Dashboard from './components/Dashboard/Dashboard'
 import Admin from './components/Admin/Admin'
 import ProductDetails from './pages/ProductDetails/ProductDetails'
 import Cart from './pages/Cart/Cart'
+import Payment from './pages/Payment/Payment'
+import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess'
+import Dashboard from './pages/Dashboard/Dashboard'
+import Creator from './pages/Creator/Creator'
+import UpgradeAccount from './pages/UpgradeAccount/UpgradeAccount'
+import SubscribePlan from './pages/SubscribePlan/SubscribePlan'
 
 const App = props => {
   const dispatch = useDispatch()
@@ -38,28 +42,50 @@ const App = props => {
       <AdminToolbar />
       <Switch>
         <Route exact path="/" component={MainPage} />
-        <Route path="/checkout" component={Checkout} />
         <Route path="/discover" render={() => (
           <Discover />
         )} />
         <Route path="/product/:productID" render={() => (
           <ProductDetails />
         )} />
+        <Route path="/subscribe-plan/:planID" render={() => (
+          <WithAuth>
+            <SubscribePlan />
+          </WithAuth>
+        )} />
         <Route path="/cart" render={() => (
           <Cart />
+        )} />
+        <Route path="/checkout" render={() => (
+          <WithAuth>
+            <Payment />
+          </WithAuth>
         )} />
         <Route path="/admin" render={() => (
           <WithAdminAuth>
             <Admin />
           </WithAdminAuth>
         )} />
+        <Route path="/payment-success" render={() => (
+          <PaymentSuccess />
+        )} />
+        <Route exact path="/dashboard" render={() => (
+          <WithAuth>
+            <Dashboard />
+          </WithAuth>
+        )} />
+        <Route exact path="/creator" render={() => (
+          <WithAuth>
+            <Creator />
+          </WithAuth>
+        )} />
+        <Route exact path="/creator/upgrade" render={() => (
+          <WithAuth>
+            <UpgradeAccount />
+          </WithAuth>
+        )} />
         <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
           <div className="w-100" style={{ maxWidth: "400px" }}>
-            <Route exact path="/dashboard" render={() => (
-              <WithAuth>
-                <Dashboard />
-              </WithAuth>
-            )} />
             <Route path="/update-profile" component={UpdateProfile} />
             <Route path="/signup" render={() => (
               <Signup />

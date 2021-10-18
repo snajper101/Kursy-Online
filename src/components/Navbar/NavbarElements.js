@@ -21,6 +21,14 @@ export const TestItem = styled.div`
     background: red;
     margin-left: 20px;
 `
+
+export const Logo = styled(LinkRoute)`
+    content: url("https://firebasestorage.googleapis.com/v0/b/kursy-online-e1f8f.appspot.com/o/NavLogo.jpg?alt=media&token=a307077c-5d8f-409c-b8ee-cb8ddb2b0343");
+    height: 40px;
+    margin-left: 2rem;
+    text-decoration: none;
+    cursor: pointer;
+`
 export const LogoSection = styled.div`
     flex: 0.33;
     display: flex;
