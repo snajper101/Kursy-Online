@@ -173,6 +173,16 @@ export const PaymentTypeButtonContainer = styled.div`
     border: 1px solid #dadce0;
     border-radius: 8px;
     margin: 0.5rem 0;   
+
+    background: ${props => props.active && "#f0f0f1" };
+`
+
+export const CardWrapper = styled.div`
+    margin: 0.5rem 0 0 0;
+    padding: 0.5rem;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    background: white;
 `
 
 export const PaymentTypeName = styled.div`
@@ -188,4 +198,127 @@ export const PaymentTypeLogo = styled.img`
     justify-content: flex-start;
     width: 50px;
     height: 13px;
+`
+
+export const PaymentTypeSvg = styled.svg`
+    height: 13px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+`
+
+export const PaymentApplePay = styled(PaymentTypeLogo)`
+    width: 21px;
+    height: 13px;
+`
+
+export const PaymentPrzelewy24Pay = styled(PaymentTypeLogo)`
+    width: 37px;
+    height: 13px;
+`
+
+export const FinishPaymentWrapper = styled.div`
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+    background: white;
+    padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
+`
+
+export const TaxesInfoWrapper = styled.div`
+    width: 100%;
+    height: 1.2rem;
+    border-bottom: 1px solid gray;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-bottom: 1rem;
+`
+
+export const TaxesInfo = styled.div`
+    font-size: 1rem;
+    font-weight: 500;
+    padding-left: 0.5rem;
+    width: 50%;
+`
+
+export const TaxesInfoValue = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1rem;
+    font-weight: 500;
+    padding-right: 0.5rem;
+    width: 50%;
+`
+
+export const SumInfoWrapper = styled.div`
+    width: 100%;
+    height: 1.7rem;
+    border-bottom: 1px solid gray;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+`
+
+export const SumInfo = styled.div`
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-left: 0.5rem;
+    width: 50%;
+    display: flex;
+    align-items: center;
+`
+
+export const SumInfoValue = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding-right: 0.5rem;
+    width: 50%;
+`
+
+export const PayButton = styled.button`
+    width: 100%;
+    padding: 0 1rem;
+    background: #2E3190;
+    height: 3rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 1rem;
+
+    &:hover {
+        opacity: 0.6;
+    }
+
+
+`
+
+export const PayButtonSvg = styled.svg`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    animation: spin infinite 1s linear;
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
 `

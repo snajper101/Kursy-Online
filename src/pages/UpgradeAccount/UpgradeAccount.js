@@ -51,7 +51,7 @@ const UpgradeAccount = () => {
                     Kursy Online - Miejsce na twoje kursy
                 </MainTitle>
                 <Cards>
-                    {
+                    {  plans && 
                         plans.map((data, planIndex) => {
                             return (<Card key={planIndex} active={data.documentID === currentUser.planId}>
                                 <CardTitle>{data.planName}</CardTitle>
