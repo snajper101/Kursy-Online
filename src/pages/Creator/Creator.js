@@ -5,18 +5,20 @@ import { useHistory } from 'react-router'
 import { checkUserIsCreator } from '../../Utils'
 
 //Styled Components
+import { CreatorWrapper, CreatorNavbar, CoursesList, CourseElementContainer, SearchInput } from './CreatorComponents'
 
 //Components
 import Navbar from '../../components/Navbar'
 import DashboardNav from '../../components/DashboardNav/DashboardNav'
 
 const mapState = (state) => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    courses: state.courses.creatorCourses
 })
 
 
 const Creator = () => {
-    const { currentUser } = useSelector(mapState)
+    const { currentUser, courses } = useSelector(mapState)
     const history = useHistory()
 
     useEffect(() => {
@@ -29,6 +31,21 @@ const Creator = () => {
         <>
             <Navbar />
             <DashboardNav />
+            <CreatorWrapper>
+                <CreatorNavbar>
+                    <SearchInput></SearchInput>
+                </CreatorNavbar>
+                <CoursesList>
+                    {
+                        courses.map((course, index ) => {
+                            return (
+                            <CourseElementContainer key={index}>
+
+                            </CourseElementContainer>)
+                        })
+                    }
+                </CoursesList>
+            </CreatorWrapper>
         </>
     )
 }

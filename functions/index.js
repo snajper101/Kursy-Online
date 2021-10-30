@@ -32,6 +32,10 @@ app.post("/payments/create", async (req, res) => {
   }
 });
 
+app.post("/subscription/create", async (req, res) => {
+
+});
+
 app.get("*", (req, res) => {
   res
       .status(404)

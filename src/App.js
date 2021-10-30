@@ -29,6 +29,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Creator from './pages/Creator/Creator'
 import UpgradeAccount from './pages/UpgradeAccount/UpgradeAccount'
 import SubscribePlan from './pages/SubscribePlan/SubscribePlan'
+import StripeWrapper from './components/StripeWrapper/StripeWrapper'
 
 const App = props => {
   const dispatch = useDispatch()
@@ -49,9 +50,11 @@ const App = props => {
           <ProductDetails />
         )} />
         <Route path="/subscribe-plan/:planID" render={() => (
-          <WithAuth>
-            <SubscribePlan />
-          </WithAuth>
+          <StripeWrapper>
+            <WithAuth>
+              <SubscribePlan />
+            </WithAuth>
+          </StripeWrapper>
         )} />
         <Route path="/cart" render={() => (
           <Cart />

@@ -7,6 +7,7 @@ import productsReducer from "./Products/products.reducer"
 import cartReducer from "./Cart/cart.reducer"
 import ordersReducer from "./Orders/orders.reducer"
 import plansReducer from "./Plans/plans.reducer"
+import coursesReducer from "./Courses/courses.reducer"
 
 export const rootReducer = combineReducers({
     user: userReducer,
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
     cartData: cartReducer,
     ordersData: ordersReducer,
     plansData: plansReducer,
+    courses: coursesReducer,
 })
 
 const configStorage = {

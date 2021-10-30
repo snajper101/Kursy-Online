@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchPlanStart } from '../../redux/Plans/plans.actions'
 import { useElements } from '@stripe/react-stripe-js'
+import { apiInstance } from '../../Utils'
 
 //Styled Components
 import {
@@ -39,7 +40,6 @@ import {
 
 //Components
 import ClearNavbar from '../../components/ClearNavbar/ClearNavbar'
-import StripeWrapper from '../../components/StripeWrapper/StripeWrapper'
 import { CountryDropdown } from 'react-country-region-selector'
 import { CardElement } from '@stripe/react-stripe-js'
 
@@ -104,12 +104,25 @@ const SubscribePlan = () => {
         if (
             !billingAddress.line1 || !billingAddress.city || !billingAddress.state || !billingAddress.postal_code || !billingAddress.country || !nameOnCard
         ) return
+
+        /*apiInstance.post("/subscription/create",{
+            amount: total * 100, //Price needs to be in cents
+            billing: {
+                name: nameOnCard,
+                address: {
+                    ...billingAddress
+                }
+            }
+        }).then(({paymentMethod}) => {
+            stripe.confirmCardPayment(clientSecret, {
+                payment_method: paymentMethod.id
+            })
+        })*/
     }
 
     return (
         <>
             <ClearNavbar />
-            <StripeWrapper>
                 <RootContainer onSubmit={event => handleFormSubmit(event, elements.getElement("card"))}>
                     <NavigationSection>
                         <NavigationElement to="">Home</NavigationElement>
@@ -233,7 +246,7 @@ const SubscribePlan = () => {
                     <FinishPaymentWrapper>
                         <TaxesInfoWrapper>
                             <TaxesInfo>Taxes: </TaxesInfo>
-                            <TaxesInfoValue>{ (selectedPlan.planPrice / 1.23) === 0 ? "0.00" : (selectedPlan.planPrice / 1.23) } zł</TaxesInfoValue>
+                            <TaxesInfoValue>{ (selectedPlan.planPrice / 1.23) === 0 ? "0.00" : (Math.round((selectedPlan.planPrice / 1.23 + Number.EPSILON) * 100) / 100) } zł</TaxesInfoValue>
                         </TaxesInfoWrapper>
                         <SumInfoWrapper>
                             <SumInfo>Sum: </SumInfo>
@@ -247,7 +260,6 @@ const SubscribePlan = () => {
                         </PayButton>
                     </FinishPaymentWrapper>
                 </RootContainer>
-            </StripeWrapper>
         </>
     )
 }
