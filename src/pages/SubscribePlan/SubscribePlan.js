@@ -99,13 +99,13 @@ const SubscribePlan = () => {
 
     const handleFormSubmit = async (event, cardElement) => {
         event.preventDefault()
-        if (!cardElement) return;
+        if (!cardElement) return
 
         if (
             !billingAddress.line1 || !billingAddress.city || !billingAddress.state || !billingAddress.postal_code || !billingAddress.country || !nameOnCard
         ) return
 
-        /*apiInstance.post("/subscription/create",{
+        apiInstance.post("/subscribtion/create", {
             amount: total * 100, //Price needs to be in cents
             billing: {
                 name: nameOnCard,
@@ -113,11 +113,17 @@ const SubscribePlan = () => {
                     ...billingAddress
                 }
             }
-        }).then(({paymentMethod}) => {
-            stripe.confirmCardPayment(clientSecret, {
-                payment_method: paymentMethod.id
-            })
-        })*/
+        }).then(({ data: clientSecret })=> {
+            stripe.createPaymentMethod({
+                type: "card",
+                card: cardElement,
+                billing_details: {
+                    name: nameOnCard,
+                    address: {
+                        ...billingAddress
+                    }
+                }
+        })
     }
 
     return (
