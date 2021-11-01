@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchPlanStart } from '../../redux/Plans/plans.actions'
-import { useElements } from '@stripe/react-stripe-js'
+import { useElements, useStripe } from '@stripe/react-stripe-js'
 import { apiInstance } from '../../Utils'
 
 //Styled Components
@@ -67,11 +67,12 @@ const mapState = (state) => ({
 const SubscribePlan = () => {
     const dispatch = useDispatch()
     const elements = useElements()
+    const stripe = useStripe()
     const [ paymentType, setPaymentType] = useState("Card")
     const [ billingAddress, setBillingAddress ] = useState({ ...initialAddressState })
     const [ nameOnCard, setNameOnCard ] = useState("")
     const [ processingPayment, setProcessingPayment] = useState(false)
-    const { state, currentUser, selectedPlan }= useSelector(mapState)
+    const { selectedPlan } = useSelector(mapState)
     const { planID } = useParams()
 
     const configCardElement = {
@@ -106,7 +107,7 @@ const SubscribePlan = () => {
         ) return
 
         apiInstance.post("/subscribtion/create", {
-            amount: total * 100, //Price needs to be in cents
+            amount: selectedPlan.planPrice * 100, //Price needs to be in cents
             billing: {
                 name: nameOnCard,
                 address: {
@@ -120,9 +121,10 @@ const SubscribePlan = () => {
                 billing_details: {
                     name: nameOnCard,
                     address: {
-                        ...billingAddress
+                        ...billingAddress,
                     }
                 }
+            })
         })
     }
 

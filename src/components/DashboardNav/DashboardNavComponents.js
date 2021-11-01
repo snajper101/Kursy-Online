@@ -29,11 +29,44 @@ export const DashboardNavbarButton = styled(LinkRoute)`
     margin-right: 2rem;
     transition: all 0.2s ease-in-out;
     text-decoration: none;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 
     &:hover {
         transition: all 0.2s ease-in-out;
         color: black;
         background: #c7cad1;
+    }
+`
+
+export const SearchBar = styled.div`
+    height: 100%;
+    padding: 3px 10px 3px 10px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-bottom: 3px;
+    background: #fff;
+    color: white;
+    font-family: "Segoe UI";
+    background-color: #EBEDF0;
+    cursor: text;
+    color: #b4b4b4;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+`
+export const SearchInput = styled.input`
+    margin: 0 0.5rem 0 0.5rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: none; 
+    display: flex;
+    align-items: center;  
+    justify-content: center; 
+
+    &::placeholder {
+        color: #979797;
     }
 `

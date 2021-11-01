@@ -30,13 +30,12 @@ const UpgradeAccount = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { currentUser, plans } = useSelector(mapState)
-    const currentPlan = currentUser.planId
 
     useEffect(() => {
         dispatch(
             fetchPlansStart()
         )
-    }, [])
+    })
 
     const handleSelectPlan = (planID) => {
         history.push(`/subscribe-plan/${planID}`)

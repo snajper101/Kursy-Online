@@ -2,12 +2,18 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { NavBar, Logo, LogoSection, AccountSection, NavigationSection, AccountButton, AccountButtonText, AccountImageButtons, AccountButtonIcon, ButtonSvg, ButtonImg, AccountButtonIconLink, AccountDropdown, AccountDropdownItem, AccountDropdownIconButton, AccountDropdownIconRight, NavigationItem } from './NavbarElements';
+import { NavBar, Logo, SocialIcon, SocialSection, SearchBar, SearchInput, LogoSection, AccountSection, NavigationSection, AccountButton, AccountButtonText, AccountImageButtons, AccountButtonIcon, ButtonSvg, ButtonImg, AccountButtonIconLink, AccountDropdown, AccountDropdownItem, AccountDropdownIconButton, AccountDropdownIconRight, NavigationItem } from './NavbarElements';
 import { ReactComponent as PlusIcon } from '../../images/plus.svg'
 import { ReactComponent as CaretIcon } from '../../images/caret.svg'
 import { ReactComponent as CogIcon } from '../../images/cog.svg'
 import { ReactComponent as CartIcon } from '../../images/cart.svg'
 import { selectCartItemsCount } from '../../redux/Cart/cart.selector';
+
+const socialIcons = ({
+    instagram: "https://firebasestorage.googleapis.com/v0/b/kursy-online-e1f8f.appspot.com/o/StaticResources%2FinstagramIcon.svg?alt=media&token=dff7e84f-9e40-4f1a-a619-00380bdf9921",
+    facebook: "https://firebasestorage.googleapis.com/v0/b/kursy-online-e1f8f.appspot.com/o/StaticResources%2FfacebookIcon.svg?alt=media&token=db4f1fb1-8050-45b8-af86-f4831deee976",
+    youtube: "https://firebasestorage.googleapis.com/v0/b/kursy-online-e1f8f.appspot.com/o/StaticResources%2FyoutubeIcon.svg?alt=media&token=db634892-2ec3-46c0-8656-426f3e043e84",
+})
 
 const mapState = (state) => ({
     currentUser: state.user.currentUser,
@@ -24,13 +30,23 @@ const Navbar = props => {
         <NavBar>
             <LogoSection>
                 <Logo to="/"></Logo>
+                <SearchBar>
+                    <SearchInput placeholder="Search"></SearchInput>
+                </SearchBar>
             </LogoSection>
             <NavigationSection>
-                <NavigationItem to="/discover">Discover</NavigationItem>
-                <NavigationItem to="/courses">Start watching</NavigationItem>
+                <NavigationItem to="/courses">Kategorie</NavigationItem>
+                <NavigationItem to="/discover">Odkrywaj</NavigationItem>
+                <NavigationItem to="/">Blog</NavigationItem>
+                <NavigationItem to="/">FAQ</NavigationItem>
             </NavigationSection>
             { currentUser && 
                 <AccountSection>
+
+                    <SocialIcon iconLink={socialIcons.youtube} onClick={() => window.open('https://www.youtube.com/', '_blank')}/>
+                    <SocialIcon iconLink={socialIcons.instagram} onClick={() => window.open('https://www.instagram.com/', '_blank')} />
+                    <SocialIcon iconLink={socialIcons.facebook} onClick={() => window.open('https://www.facebook.com/', '_blank')} />
+                    
                     { ( location.pathname === "/discover" || location.pathname === "/cart" || location.pathname.includes("/product") ) && 
                         <AccountButton to="/cart">
                             <AccountButtonText>Basket {totalNumCartItems > 0 ? `(${totalNumCartItems})` : ""}</AccountButtonText>
@@ -70,6 +86,7 @@ const Navbar = props => {
                 </AccountSection>
             }
         </NavBar>
+        
     );
 }
 

@@ -300,8 +300,6 @@ export const PayButton = styled.button`
     &:hover {
         opacity: 0.6;
     }
-
-
 `
 
 export const PayButtonSvg = styled.svg`

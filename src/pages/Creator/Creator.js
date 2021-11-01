@@ -5,7 +5,16 @@ import { useHistory } from 'react-router'
 import { checkUserIsCreator } from '../../Utils'
 
 //Styled Components
-import { CreatorWrapper, CreatorNavbar, CoursesList, CourseElementContainer, SearchInput } from './CreatorComponents'
+import { CreatorWrapper, 
+    CreatorNavbar, 
+    CoursesList, 
+    CourseElementContainer, 
+    ReturnNavbarButton,
+    SearchBar,
+    SearchInput,
+    DashboardNavbarButton,
+    MainSection,
+} from './CreatorComponents'
 
 //Components
 import Navbar from '../../components/Navbar'
@@ -27,25 +36,29 @@ const Creator = () => {
         }
     }, [currentUser])
 
-    return (
+    return (    
         <>
-            <Navbar />
-            <DashboardNav />
-            <CreatorWrapper>
-                <CreatorNavbar>
-                    <SearchInput></SearchInput>
-                </CreatorNavbar>
-                <CoursesList>
-                    {
-                        courses.map((course, index ) => {
-                            return (
-                            <CourseElementContainer key={index}>
+            <CreatorNavbar>
+                <ReturnNavbarButton to="/dashboard">Dashboard</ReturnNavbarButton>
+                    <SearchBar>
+                        <SearchInput />
+                    </SearchBar>
+                    <DashboardNavbarButton to="/creator/create-course/new">Create</DashboardNavbarButton>
+            </CreatorNavbar>
+            <MainSection>
+                <CreatorWrapper>
+                    <CoursesList>
+                        {
+                            courses.map((course, index ) => {
+                                return (
+                                <CourseElementContainer key={index}>
 
-                            </CourseElementContainer>)
-                        })
-                    }
-                </CoursesList>
-            </CreatorWrapper>
+                                </CourseElementContainer>)
+                            })
+                        }
+                    </CoursesList>
+                </CreatorWrapper>
+            </MainSection>
         </>
     )
 }

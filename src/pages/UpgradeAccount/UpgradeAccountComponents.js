@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import checkSVG from "../../images/check.svg"
 
 export const PlansContainer = styled.div`
     font-family: inherit;

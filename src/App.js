@@ -30,13 +30,14 @@ import Creator from './pages/Creator/Creator'
 import UpgradeAccount from './pages/UpgradeAccount/UpgradeAccount'
 import SubscribePlan from './pages/SubscribePlan/SubscribePlan'
 import StripeWrapper from './components/StripeWrapper/StripeWrapper'
+import CreateCourse from './pages/CreateCourse/CreateCourse'
 
 const App = props => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(checkUserSession())
-  }, [])
+  })
 
   return (
     <>
@@ -80,6 +81,11 @@ const App = props => {
         <Route exact path="/creator" render={() => (
           <WithAuth>
             <Creator />
+          </WithAuth>
+        )} />
+        <Route exact path="/creator/create-course/:courseID" render={() => (
+          <WithAuth>
+            <CreateCourse />
           </WithAuth>
         )} />
         <Route exact path="/creator/upgrade" render={() => (
