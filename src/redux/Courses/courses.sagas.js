@@ -1,7 +1,7 @@
 import coursesTypes from "./courses.types";
 import { takeLatest, put, all, call } from "redux-saga/effects"
-import { handleVerifyCourseDraft, handleAddNewDraft } from "./courses.helpers";
-import { setIsVerifiedCourse, setCreatorDraft } from "./courses.actions"
+import { handleVerifyCourseDraft, handleAddNewDraft, handleFetchDraft, handleFetchCreatorCourses } from "./courses.helpers";
+import { setIsVerifiedCourse, setCreatorDraft, setCreatorCourses } from "./courses.actions"
 
 export function* verifyCourseDraft({payload}) {
     try {
@@ -20,7 +20,8 @@ export function* onVerifyCourseDraftStart() {
 
 export function* addNewDraft({payload}) {
     try {
-        const draft = yield handleAddNewDraft(payload)
+        const draftID = yield handleAddNewDraft(payload)
+        const draft = yield handleFetchDraft(draftID)
         yield put(
             setCreatorDraft(draft)
         )
@@ -33,9 +34,25 @@ export function* onAddNewDraftStart() {
     yield takeLatest(coursesTypes.ADD_NEW_DRAFT_START, addNewDraft)
 }
 
+export function* getCreatorCourses({payload}) {
+    try {
+        const courses = yield handleFetchCreatorCourses(payload)
+        yield put(
+            setCreatorCourses(courses)
+        )
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* onGetCreatorCoursesStart() {
+    yield takeLatest(coursesTypes.GET_CREATOR_DRAFTS_START, getCreatorCourses)
+}
+
 export default function* coursesSagas() {
     yield all([
         call(onVerifyCourseDraftStart),
-        call(onAddNewDraftStart)
+        call(onAddNewDraftStart),
+        call(onGetCreatorCoursesStart)
     ])
 }

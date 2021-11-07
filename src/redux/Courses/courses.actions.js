@@ -19,3 +19,13 @@ export const setCreatorDraft = draft => ({
     type: coursesTypes.SET_CREATOR_DRAFT,
     payload: draft 
 })
+
+export const getCreatorCourses = creator => ({
+    type: coursesTypes.GET_CREATOR_DRAFTS_START,
+    payload: creator
+})
+
+export const setCreatorCourses = courses => ({
+    type: coursesTypes.SET_CREATOR_COURSES,
+    payload: courses
+})

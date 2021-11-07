@@ -19,6 +19,11 @@ const coursesReducer = (state=INITIAL_STATE, action) => {
                 ...state,
                 creatorDraft: action.payload
             }
+        case coursesTypes.SET_CREATOR_COURSES:
+            return {
+                ...state,
+                creatorCourses: action.payload
+            }
         default:
             return state;
     }

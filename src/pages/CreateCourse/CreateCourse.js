@@ -5,7 +5,14 @@ import { useHistory } from 'react-router';
 import { verifyCourseDraft, addNewDraft } from '../../redux/Courses/courses.actions';
 
 //Styled Components
-import {} from "./CreateCourseComponents";
+import {
+    LeftSection,
+    LeftContainer,
+    MainSection,
+    BottomOptions,
+    BottomButtonsContainer,
+    BottomButton
+} from "./CreateCourseComponents";
 
 //Components
 
@@ -42,14 +49,26 @@ const Create = () => {
     }, [draftVerified])
 
     useEffect(() => {
-        if (creatorDraft && courseID == "new") {
-            history.push("/" + creatorDraft.documentID)
+        if (creatorDraft.documentID && courseID === "new") {
+            history.push("/creator/create-course/" + creatorDraft.documentID)
         }
     }, [creatorDraft])
 
     return (
         <>
-          <h1>SEX</h1>  
+            <LeftSection>
+                <LeftContainer>
+
+                </LeftContainer>
+            </LeftSection>
+            <MainSection>
+                <BottomOptions>
+                    <BottomButtonsContainer>
+                        <BottomButton></BottomButton>
+                        <BottomButton></BottomButton>
+                    </BottomButtonsContainer>
+                </BottomOptions>
+            </MainSection>
         </>
     )
 }
