@@ -34,6 +34,23 @@ export function* onAddNewDraftStart() {
     yield takeLatest(coursesTypes.ADD_NEW_DRAFT_START, addNewDraft)
 }
 
+export function* deleteNewDraft({payload}) {
+    try {
+        const creatorID, courseID = payload
+        yield handleDeleteDraft(courseID)
+        const courses = yield handleFetchCreatorCourses(creatorID)
+        yield put(
+            setCreatorCourses(courses)
+        )
+    } catch(erorr){
+        // console.log(error);
+    }
+}
+
+export function* onDeleteDraftStart() {
+    yield takeLatest(coursesTypes.DELETE_DRAFT_START, deleteNewDraft)
+}
+
 export function* getCreatorCourses({payload}) {
     try {
         const courses = yield handleFetchCreatorCourses(payload)
@@ -41,7 +58,7 @@ export function* getCreatorCourses({payload}) {
             setCreatorCourses(courses)
         )
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 }
 
@@ -53,6 +70,7 @@ export default function* coursesSagas() {
     yield all([
         call(onVerifyCourseDraftStart),
         call(onAddNewDraftStart),
-        call(onGetCreatorCoursesStart)
+        call(onGetCreatorCoursesStart),
+        call(onDeleteDraftStart)
     ])
 }

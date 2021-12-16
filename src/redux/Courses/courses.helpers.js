@@ -72,3 +72,12 @@ export const handleFetchCreatorCourses = creatorID => {
             })
     })
 }
+
+export const handleDeleteDraft = draftID => {
+    return new Promise((resolve, reject) => {
+        firestore
+            .collection("courses")
+            .doc(draftID)
+            .delete()
+    })
+}
